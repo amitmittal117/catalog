@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+</head>
+<nav>
+    <div class="nav-wrapper green lighten-2">
+      <a href="#" class="brand-logo" style="padding: 0px 0px 0px 10px"><font color="#ffeb3b"><strong>catalog</strong></font></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+<!--        <li><a href="sass.html">Sass</a></li>-->
+      </ul>
+    </div>
+  </nav>
+<body>
+    <br/>
+    <br/>
+    <br/>
+    <div class="container">
+        <form class="col s12">
+            <div class="input-field col s3">
+              <input id="Actor_one" type="text" class="validate">
+              <label for="Actor_one">Actor one</label>
+            </div>
+            <br/>
+            <div class="input-field col s3">
+              <input id="Actor_two" type="text" class="validate">
+              <label for="Actor_two">Actor Two</label>
+            </div>
+            <br/>
+            <br/>
+            <a class="waves-effect waves-light btn-small" onclick="populate()">Button</a>
+        </form>
+    </div>
+    <script async type="text/javascript">
+        function populate(){
+<!--           debugger;-->
+           Actor_one=document.getElementById("Actor_one").value
+           Actor_two=document.getElementById("Actor_two").value
+           $.ajax({
+                url : "/main/populate/",
+                type : "POST",
+                data : {
+                        'Actor_one':Actor_one,
+                        'Actor_two':Actor_two
+                },
+                success : function() {
+                        alert("submited data");
+                        location.reload();
+                },
+                error : function(xhr,errmsg,err) {
+                    console.log(xhr.status + ": " + xhr.responseText);
+                    $('.overlay').hide();
+            }});
+        }
+    </script>
+</body>
+</html>
